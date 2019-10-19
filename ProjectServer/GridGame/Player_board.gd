@@ -1,14 +1,14 @@
 extends Node2D
 sync var isTurn = false
 sync var score = 0
-
-func turnStart():#Server
+puppet func turnStart():#Server
+	print("server turn start")
 	isTurn = true
 	rpc("RPCturnStart")
-func turnEnd():#Server
+puppet func turnEnd():#Server
+	print("server turn end")
 	isTurn = false
 	rpc("RPCturnEnd")
-func update_score(score):
-	rset("score",score)
-
-	
+remote func recieved_other_record(other):
+	var id = get_tree().get_rpc_sender_id()
+	print("got " + str(other) + " from " + network.player_dict[id])

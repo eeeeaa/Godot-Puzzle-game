@@ -3,9 +3,7 @@ extends Node2D
 onready var boardMap = $board_pos
 onready var Player = load("res://GridGame/Player_board.tscn")
 onready var Player_queue = get_node("Players")
-var prev_board = []
 var countdown = 10
-var index = 0
 var timer
 puppet func spawn_player(id):
 	var player = Player.instance()
@@ -29,18 +27,8 @@ func _on_timer_timeout():
 		countdown -= 1
 		$Interface/upper_panel/timeText.text = str(countdown)
 
-static func compare_board(board_a:Array,board_b:Array):
-	var score = 0
-	var length = min(board_a.size(),board_b.size())
-	for i in range(length):
-		if board_a[i] == board_b[i]:
-			score+=1
-	if board_a.size() == board_b.size() and score == board_a.size():
-		print("true")
-	else:
-		print("false")
 func clear_board():
 	pass
 		
 func _on_turnButton_pressed():
-	pass
+	rpc_id(1,"change_turn")

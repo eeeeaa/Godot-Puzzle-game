@@ -10,7 +10,7 @@
 [ext_resource path="res://Asset/8-BIT WONDER.TTF" type="DynamicFontData" id=8]
 [ext_resource path="res://GridGame/bottom_panel.gd" type="Script" id=9]
 
-[sub_resource type="TileSet" id=8]
+[sub_resource type="TileSet" id=1]
 0/name = "d1.png 0"
 0/texture = ExtResource( 3 )
 0/tex_offset = Vector2( 0, 0 )
@@ -42,7 +42,7 @@
 2/shapes = [  ]
 2/z_index = 0
 
-[sub_resource type="StyleBoxFlat" id=5]
+[sub_resource type="StyleBoxFlat" id=2]
 bg_color = Color( 0.203922, 0.305882, 0.294118, 1 )
 border_width_left = 3
 border_width_top = 3
@@ -50,13 +50,13 @@ border_width_right = 3
 border_width_bottom = 3
 border_color = Color( 0.356863, 0.356863, 0.356863, 1 )
 
-[sub_resource type="DynamicFontData" id=2]
+[sub_resource type="DynamicFontData" id=3]
 font_path = "res://Asset/8-BIT WONDER.TTF"
 
-[sub_resource type="DynamicFont" id=3]
-font_data = SubResource( 2 )
-
 [sub_resource type="DynamicFont" id=4]
+font_data = SubResource( 3 )
+
+[sub_resource type="DynamicFont" id=5]
 outline_color = Color( 0.0784314, 0.537255, 0.788235, 1 )
 font_data = ExtResource( 8 )
 
@@ -78,7 +78,7 @@ script = ExtResource( 1 )
 script = ExtResource( 2 )
 
 [node name="board_pos" type="TileMap" parent="."]
-tile_set = SubResource( 8 )
+tile_set = SubResource( 1 )
 format = 1
 tile_data = PoolIntArray( 196612, 2, 0, 196613, 2, 0, 196614, 2, 0, 196615, 2, 0, 262148, 2, 0, 262149, 2, 0, 262150, 2, 0, 262151, 2, 0, 327684, 2, 0, 327685, 2, 0, 327686, 2, 0, 327687, 2, 0, 393220, 2, 0, 393221, 2, 0, 393222, 2, 0, 393223, 2, 0 )
 
@@ -150,14 +150,14 @@ editor/display_folded = true
 [node name="upper_panel" type="Panel" parent="Interface"]
 margin_right = 800.0
 margin_bottom = 130.0
-custom_styles/panel = SubResource( 5 )
+custom_styles/panel = SubResource( 2 )
 
 [node name="my_score" type="Label" parent="Interface/upper_panel"]
 margin_left = 20.0
 margin_top = 80.0
 margin_right = 138.0
 margin_bottom = 127.0
-custom_fonts/font = SubResource( 3 )
+custom_fonts/font = SubResource( 4 )
 text = "Score"
 valign = 1
 
@@ -166,7 +166,7 @@ margin_left = 670.0
 margin_top = 80.0
 margin_right = 788.0
 margin_bottom = 127.0
-custom_fonts/font = SubResource( 3 )
+custom_fonts/font = SubResource( 4 )
 text = "timer"
 valign = 1
 
@@ -182,7 +182,7 @@ margin_left = 20.0
 margin_top = 40.0
 margin_right = 120.0
 margin_bottom = 70.0
-custom_fonts/font = SubResource( 4 )
+custom_fonts/font = SubResource( 5 )
 
 [node name="bottom_panel" type="Panel" parent="Interface"]
 margin_top = 580.0

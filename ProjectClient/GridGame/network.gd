@@ -9,6 +9,7 @@ signal server_disconnected
 signal players_updated
 
 var my_name = "Client"
+var my_score = 0
 var player_dict = {}#Stored as id:name
 func _ready():
 	get_tree().connect("connected_to_server", self, "_connected_ok")

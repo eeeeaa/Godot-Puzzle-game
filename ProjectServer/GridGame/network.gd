@@ -9,7 +9,7 @@ const MAX_PLAYERS = 2
 # Players dict stored as id:name
 var player_dict = {}
 var ready_players = []
-
+signal post_game_finished
 func _ready():
 	get_tree().connect("network_peer_connected", self, "_player_connected")
 	get_tree().connect("network_peer_disconnected", self,"_player_disconnected")
@@ -65,4 +65,4 @@ remote func post_start_game():
 	var world = get_node("/root/GridGame")
 	for player in world.get_node("Players").get_children():
 		world.rpc_id(caller_id, "spawn_player", player.get_network_master())
-	
+	emit_signal("post_game_finished")
