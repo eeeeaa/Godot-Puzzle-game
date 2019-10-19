@@ -52,7 +52,8 @@ remote func player_ready():
 		ready_players.append(caller_id)
 		
 	if ready_players.size() == player_dict.size():
-		pre_start_game()
+		if ready_players.size() >= 2:
+			pre_start_game()
 func pre_start_game():
 	var world = load("res://GridGame/GridGame.tscn").instance()
 	get_tree().get_root().add_child(world)

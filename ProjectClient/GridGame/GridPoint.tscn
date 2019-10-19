@@ -14,6 +14,5 @@ shape = SubResource( 1 )
 [node name="Sprite" type="Sprite" parent="."]
 
 [node name="Select" type="Sprite" parent="."]
-[connection signal="input_event" from="." to="." method="_on_GridPoint_input_event"]
 [connection signal="mouse_entered" from="." to="." method="_on_GridPoint_mouse_entered"]
 [connection signal="mouse_exited" from="." to="." method="_on_GridPoint_mouse_exited"]
