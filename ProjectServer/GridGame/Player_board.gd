@@ -10,4 +10,5 @@ func turnEnd():#Server
 	rpc("RPCturnEnd")
 func update_score(score):
 	rset("score",score)
+
 	

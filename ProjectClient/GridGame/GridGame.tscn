@@ -10,7 +10,7 @@
 [ext_resource path="res://Asset/8-BIT WONDER.TTF" type="DynamicFontData" id=8]
 [ext_resource path="res://GridGame/bottom_panel.gd" type="Script" id=9]
 
-[sub_resource type="TileSet" id=1]
+[sub_resource type="TileSet" id=8]
 0/name = "d1.png 0"
 0/texture = ExtResource( 3 )
 0/tex_offset = Vector2( 0, 0 )
@@ -78,54 +78,74 @@ script = ExtResource( 1 )
 script = ExtResource( 2 )
 
 [node name="board_pos" type="TileMap" parent="."]
-position = Vector2( -24, -24 )
-tile_set = SubResource( 1 )
+tile_set = SubResource( 8 )
 format = 1
-tile_data = PoolIntArray( 262149, 2, 0, 262150, 2, 0, 262151, 2, 0, 327685, 2, 0, 327686, 2, 0, 327687, 2, 0, 393221, 2, 0, 393222, 2, 0, 393223, 2, 0 )
+tile_data = PoolIntArray( 196612, 2, 0, 196613, 2, 0, 196614, 2, 0, 196615, 2, 0, 262148, 2, 0, 262149, 2, 0, 262150, 2, 0, 262151, 2, 0, 327684, 2, 0, 327685, 2, 0, 327686, 2, 0, 327687, 2, 0, 393220, 2, 0, 393221, 2, 0, 393222, 2, 0, 393223, 2, 0 )
 
 [node name="board" type="Node2D" parent="."]
 editor/display_folded = true
-visible = false
 position = Vector2( -120, -120 )
 z_as_relative = false
 
 [node name="GridPoint" parent="board" instance=ExtResource( 6 )]
-position = Vector2( 448.204, 383.592 )
+position = Vector2( 407.207, 343.715 )
 
 [node name="GridPoint2" parent="board" instance=ExtResource( 6 )]
-position = Vector2( 512.204, 383.592 )
+position = Vector2( 471.207, 343.715 )
 
 [node name="GridPoint3" parent="board" instance=ExtResource( 6 )]
-position = Vector2( 576.204, 383.592 )
+position = Vector2( 535.207, 343.715 )
 
 [node name="GridPoint4" parent="board" instance=ExtResource( 6 )]
-position = Vector2( 448.204, 447.592 )
+position = Vector2( 598.551, 344.865 )
 
 [node name="GridPoint5" parent="board" instance=ExtResource( 6 )]
-position = Vector2( 512.204, 447.592 )
+position = Vector2( 407.658, 407.715 )
 
 [node name="GridPoint6" parent="board" instance=ExtResource( 6 )]
-position = Vector2( 576.204, 447.592 )
+position = Vector2( 472.356, 407.715 )
 
 [node name="GridPoint7" parent="board" instance=ExtResource( 6 )]
-position = Vector2( 448.204, 511.592 )
+position = Vector2( 534.304, 407.468 )
 
 [node name="GridPoint8" parent="board" instance=ExtResource( 6 )]
-position = Vector2( 512.204, 511.592 )
+position = Vector2( 599.003, 408.166 )
 
 [node name="GridPoint9" parent="board" instance=ExtResource( 6 )]
-position = Vector2( 576.204, 511.592 )
+position = Vector2( 408.356, 472.095 )
+
+[node name="GridPoint10" parent="board" instance=ExtResource( 6 )]
+position = Vector2( 473.055, 472.095 )
+
+[node name="GridPoint11" parent="board" instance=ExtResource( 6 )]
+position = Vector2( 535.003, 472.095 )
+
+[node name="GridPoint12" parent="board" instance=ExtResource( 6 )]
+position = Vector2( 599.25, 470.698 )
+
+[node name="GridPoint13" parent="board" instance=ExtResource( 6 )]
+position = Vector2( 408.356, 534.19 )
+
+[node name="GridPoint14" parent="board" instance=ExtResource( 6 )]
+position = Vector2( 473.055, 534.19 )
+
+[node name="GridPoint15" parent="board" instance=ExtResource( 6 )]
+position = Vector2( 535.905, 534.19 )
+
+[node name="GridPoint16" parent="board" instance=ExtResource( 6 )]
+position = Vector2( 599.25, 534.19 )
 
 [node name="ParallaxBackground" type="ParallaxBackground" parent="."]
-editor/display_folded = true
 
 [node name="Sprite" type="Sprite" parent="ParallaxBackground"]
+visible = false
 position = Vector2( -0.347168, -0.606506 )
 scale = Vector2( 1.3332, 1.33585 )
 texture = ExtResource( 7 )
 centered = false
 
 [node name="Interface" type="CanvasLayer" parent="."]
+editor/display_folded = true
 
 [node name="upper_panel" type="Panel" parent="Interface"]
 margin_right = 800.0
