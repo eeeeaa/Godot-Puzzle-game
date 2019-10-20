@@ -11,6 +11,12 @@ signal players_updated
 var my_name = "Client"
 var my_score = 0
 var player_dict = {}#Stored as id:name
+
+var name_1
+var name_2
+var score_1
+var score_2
+
 func _ready():
 	get_tree().connect("connected_to_server", self, "_connected_ok")
 	get_tree().connect("connection_failed", self, "_connected_fail")
@@ -52,4 +58,7 @@ puppet func pre_start_game():
 	var world = load("res://GridGame/GridGame.tscn").instance()
 	get_tree().get_root().add_child(world)
 	rpc_id(1, "post_start_game")
-	
+puppetsync func end_game():
+	var world = get_tree().get_root().get_node("GridGame")
+	get_tree().get_root().remove_child(world)
+	get_tree().change_scene("res://GridGame/Result.tscn")

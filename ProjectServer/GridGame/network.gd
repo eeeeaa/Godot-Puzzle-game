@@ -8,7 +8,10 @@ const MAX_PLAYERS = 2
 
 # Players dict stored as id:name
 var player_dict = {}
+var player_score = {}
 var ready_players = []
+sync var prev_board = []
+sync var end_round = false
 signal post_game_finished
 func _ready():
 	get_tree().connect("network_peer_connected", self, "_player_connected")
@@ -32,7 +35,6 @@ remote func register_player(new_player_name):
 	if not has_node("/root/GridGame"):
 		# Add him to our list
 		player_dict[caller_id] = new_player_name
-		
 		# Add everyone to new player:
 		for p_id in player_dict:
 			rpc_id(caller_id, "register_player", p_id, player_dict[p_id]) # Send each player to new dude
@@ -66,3 +68,8 @@ remote func post_start_game():
 	for player in world.get_node("Players").get_children():
 		world.rpc_id(caller_id, "spawn_player", player.get_network_master())
 	emit_signal("post_game_finished")
+func end_game():
+	var world = get_tree().get_root().get_node("GridGame")
+	rpc("end_game")
+	get_tree().get_root().remove_child(world)
+	get_tree().change_scene("res://GridGame/Result.tscn")

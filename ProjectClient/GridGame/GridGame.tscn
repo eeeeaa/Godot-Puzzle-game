@@ -145,8 +145,10 @@ texture = ExtResource( 7 )
 centered = false
 
 [node name="Interface" type="CanvasLayer" parent="."]
+editor/display_folded = true
 
 [node name="upper_panel" type="Panel" parent="Interface"]
+editor/display_folded = true
 margin_right = 800.0
 margin_bottom = 130.0
 custom_styles/panel = SubResource( 2 )
