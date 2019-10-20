@@ -31,3 +31,11 @@ visible = false
 [node name="GridPoint8" parent="board" instance=ExtResource( 3 )]
 
 [node name="GridPoint9" parent="board" instance=ExtResource( 3 )]
+
+[node name="resetScoreButton" type="Button" parent="."]
+margin_left = 323.783
+margin_top = 344.455
+margin_right = 458.783
+margin_bottom = 383.455
+text = "reset score"
+[connection signal="pressed" from="resetScoreButton" to="." method="_on_resetScoreButton_pressed"]

@@ -1,4 +1,4 @@
-[gd_scene load_steps=17 format=2]
+[gd_scene load_steps=21 format=2]
 
 [ext_resource path="res://GridGame/GridGame.gd" type="Script" id=1]
 [ext_resource path="res://GridGame/TurnController.gd" type="Script" id=2]
@@ -7,8 +7,10 @@
 [ext_resource path="res://Asset/d4.png" type="Texture" id=5]
 [ext_resource path="res://GridGame/GridPoint.tscn" type="PackedScene" id=6]
 [ext_resource path="res://Asset/black_background.jpg" type="Texture" id=7]
-[ext_resource path="res://Asset/8-BIT WONDER.TTF" type="DynamicFontData" id=8]
-[ext_resource path="res://GridGame/bottom_panel.gd" type="Script" id=9]
+[ext_resource path="res://custom.tres" type="Theme" id=8]
+[ext_resource path="res://Asset/Retro Gaming.ttf" type="DynamicFontData" id=9]
+[ext_resource path="res://Asset/8-BIT WONDER.TTF" type="DynamicFontData" id=10]
+[ext_resource path="res://GridGame/bottom_panel.gd" type="Script" id=11]
 
 [sub_resource type="TileSet" id=1]
 0/name = "d1.png 0"
@@ -50,15 +52,17 @@ border_width_right = 3
 border_width_bottom = 3
 border_color = Color( 0.356863, 0.356863, 0.356863, 1 )
 
-[sub_resource type="DynamicFontData" id=3]
-font_path = "res://Asset/8-BIT WONDER.TTF"
+[sub_resource type="DynamicFont" id=3]
+size = 24
+font_data = ExtResource( 9 )
 
 [sub_resource type="DynamicFont" id=4]
-font_data = SubResource( 3 )
+size = 24
+font_data = ExtResource( 9 )
 
 [sub_resource type="DynamicFont" id=5]
 outline_color = Color( 0.0784314, 0.537255, 0.788235, 1 )
-font_data = ExtResource( 8 )
+font_data = ExtResource( 10 )
 
 [sub_resource type="StyleBoxFlat" id=6]
 bg_color = Color( 0.156863, 0.14902, 0.188235, 1 )
@@ -70,6 +74,20 @@ border_color = Color( 0.282353, 0.262745, 0.513726, 1 )
 
 [sub_resource type="StyleBoxFlat" id=7]
 bg_color = Color( 0.109804, 0.109804, 0.109804, 1 )
+
+[sub_resource type="StyleBoxFlat" id=8]
+bg_color = Color( 0.258824, 0.14902, 0.215686, 1 )
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color( 0.584314, 0, 0.235294, 1 )
+
+[sub_resource type="DynamicFont" id=9]
+size = 10
+extra_spacing_top = 3
+extra_spacing_bottom = 3
+font_data = ExtResource( 9 )
 
 [node name="GridGame" type="Node2D"]
 script = ExtResource( 1 )
@@ -136,21 +154,19 @@ position = Vector2( 535.905, 534.19 )
 position = Vector2( 599.25, 534.19 )
 
 [node name="ParallaxBackground" type="ParallaxBackground" parent="."]
-editor/display_folded = true
 
 [node name="Sprite" type="Sprite" parent="ParallaxBackground"]
-position = Vector2( -0.347168, -0.606506 )
+position = Vector2( 0, -7.10543e-015 )
 scale = Vector2( 1.3332, 1.33585 )
 texture = ExtResource( 7 )
 centered = false
 
 [node name="Interface" type="CanvasLayer" parent="."]
-editor/display_folded = true
 
 [node name="upper_panel" type="Panel" parent="Interface"]
-editor/display_folded = true
 margin_right = 800.0
 margin_bottom = 130.0
+theme = ExtResource( 8 )
 custom_styles/panel = SubResource( 2 )
 
 [node name="my_score" type="Label" parent="Interface/upper_panel"]
@@ -158,7 +174,7 @@ margin_left = 20.0
 margin_top = 80.0
 margin_right = 138.0
 margin_bottom = 127.0
-custom_fonts/font = SubResource( 4 )
+custom_fonts/font = SubResource( 3 )
 text = "Score"
 valign = 1
 
@@ -172,10 +188,10 @@ text = "timer"
 valign = 1
 
 [node name="turnButton" type="Button" parent="Interface/upper_panel"]
-margin_left = 320.0
-margin_top = 70.0
-margin_right = 466.0
-margin_bottom = 111.0
+margin_left = 309.17
+margin_top = 466.198
+margin_right = 455.17
+margin_bottom = 507.198
 text = "end turn"
 
 [node name="my_name" type="Label" parent="Interface/upper_panel"]
@@ -185,12 +201,29 @@ margin_right = 120.0
 margin_bottom = 70.0
 custom_fonts/font = SubResource( 5 )
 
+[node name="turn_status" type="Label" parent="Interface/upper_panel"]
+margin_left = 320.0
+margin_right = 464.0
+margin_bottom = 32.0
+theme = ExtResource( 8 )
+text = "turn status"
+valign = 1
+
+[node name="whose_turn" type="Label" parent="Interface/upper_panel"]
+margin_left = 320.0
+margin_top = 96.0
+margin_right = 464.0
+margin_bottom = 128.0
+theme = ExtResource( 8 )
+text = "whose turn"
+valign = 1
+
 [node name="bottom_panel" type="Panel" parent="Interface"]
 margin_top = 580.0
 margin_right = 800.0
 margin_bottom = 800.0
 custom_styles/panel = SubResource( 6 )
-script = ExtResource( 9 )
+script = ExtResource( 11 )
 
 [node name="chat_display" type="TextEdit" parent="Interface/bottom_panel"]
 margin_left = 20.0
@@ -207,4 +240,18 @@ margin_left = 20.0
 margin_top = 180.0
 margin_right = 780.0
 margin_bottom = 204.0
+
+[node name="game_output" type="TextEdit" parent="Interface"]
+margin_left = 624.0
+margin_top = 176.0
+margin_right = 772.0
+margin_bottom = 528.0
+theme = ExtResource( 8 )
+custom_styles/read_only = SubResource( 8 )
+custom_fonts/font = SubResource( 9 )
+custom_colors/font_color = Color( 0.788235, 1, 0, 1 )
+readonly = true
+context_menu_enabled = false
+smooth_scrolling = true
+wrap_enabled = true
 [connection signal="pressed" from="Interface/upper_panel/turnButton" to="." method="_on_turnButton_pressed"]

@@ -9,10 +9,10 @@ func get_active_player_index():
 func start_turn():
 	get_child(active_player_index).turnStart()
 func change_turn():
-	round_count += 1
 	print("round " + str(round_count))
-	end_game()
 	get_child(active_player_index).turnEnd()
+	round_count += 1
+	end_game()
 	active_player_index = (active_player_index + 1)%get_child_count()
 	get_child(active_player_index).turnStart()
 func update_score(score):#####

@@ -30,11 +30,12 @@ func compare_board(board_a:Array,board_b:Array):
 	var length = min(board_a.size(),board_b.size())
 	if length == 0:
 		return 0
-	for i in range(length):
-		if board_a[i][0] == board_b[i][0] and board_a[i][1] == board_b[i][1]:
-			score+=1
-	if board_a.size() == board_b.size() and score == board_a.size():
-		print("true")
 	else:
-		print("false")
-	return score
+		for i in range(length):
+			if board_a[i][0] == board_b[i][0] and board_a[i][1] == board_b[i][1]:
+				score+=1
+		if board_a.size() == board_b.size() and score == board_a.size():
+			print("true")
+		else:
+			print("false")
+		return score

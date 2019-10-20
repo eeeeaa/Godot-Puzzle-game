@@ -18,6 +18,8 @@ sync func _update_grid(selected_tile_pos,selected_tile_index):
 	boardMap.set_cellv(selected_tile_pos,selected_tile_index)
 remote func update_score(score):
 		network.my_score += int(score)
+func reset_score():
+	network.my_score = 0
 func send_score(score):
 	rpc_id(1,"set_my_score",score)
 func _on_turn_changed():
