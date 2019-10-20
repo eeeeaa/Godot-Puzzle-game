@@ -136,16 +136,15 @@ position = Vector2( 535.905, 534.19 )
 position = Vector2( 599.25, 534.19 )
 
 [node name="ParallaxBackground" type="ParallaxBackground" parent="."]
+editor/display_folded = true
 
 [node name="Sprite" type="Sprite" parent="ParallaxBackground"]
-visible = false
 position = Vector2( -0.347168, -0.606506 )
 scale = Vector2( 1.3332, 1.33585 )
 texture = ExtResource( 7 )
 centered = false
 
 [node name="Interface" type="CanvasLayer" parent="."]
-editor/display_folded = true
 
 [node name="upper_panel" type="Panel" parent="Interface"]
 margin_right = 800.0

@@ -5,12 +5,16 @@ var one_shot = false
 func _ready():
 	network.connect("post_game_finished",self,"_on_post_finished")
 func _on_post_finished():
-	if one_shot == false:
+	#starting the first round
+	if one_shot == false:#make sure it runs only one time
+		#randomize first player
 		var random_start = randi()%100-1
 		if(random_start%2 == 0):
 			Player_queue.active_player_index = 0
+			rpc_id(int(Player_queue.get_child(0).name),"turn_button_active")
 		else:
 			Player_queue.active_player_index = 1
+			rpc_id(int(Player_queue.get_child(1).name),"turn_button_active")
 		Player_queue.start_turn()
 		one_shot = true
 func spawn_player(id):
@@ -20,17 +24,14 @@ func spawn_player(id):
 	Player_queue.add_child(player)
 
 remote func change_turn():
-	Player_queue.change_turn()
+	#only change turn if recieved command from the active player
+	print("server change turn")
+	if int(Player_queue.get_child(Player_queue.get_active_player_index()).name) == get_tree().get_rpc_sender_id():
+		rpc("clear_board")
+		rpc("turn_button_swap")
+		Player_queue.change_turn()
+		
 	
-func compare_board(board_a:Array,board_b:Array):
-	var score = 0
-	var length = min(board_a.size(),board_b.size())
-	for i in range(length):
-		if board_a[i] == board_b[i]:
-			score+=1
-	if board_a.size() == board_b.size() and score == board_a.size():
-		print("true")
-	else:
-		print("false")
+
 
 
