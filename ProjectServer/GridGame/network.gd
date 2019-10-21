@@ -10,6 +10,7 @@ const MAX_PLAYERS = 2
 var player_dict = {}
 var player_score = {}
 var ready_players = []
+var seq = 0
 sync var prev_board = []
 sync var end_round = false
 signal post_game_finished

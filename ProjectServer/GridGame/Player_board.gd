@@ -14,7 +14,7 @@ remote func set_my_score(score):
 	network.player_score[get_tree().get_rpc_sender_id()] = score
 remote func recieved_other_record(other):
 	var id = get_tree().get_rpc_sender_id()
-	if !network.prev_board.empty():
+	if network.seq == 1:
 		score = compare_board(network.prev_board,other)
 		rpc_id(id,"update_score",score)
 		print("stored board(Defend): " + str(network.prev_board))

@@ -33,11 +33,11 @@ remote func change_turn():
 			rpc("clear_board")
 			rpc("turn_button_swap")
 			rpc("display_to_output","Turn ended")
-			if network.prev_board.empty():
-				network.prev_board = [ [-1,-1] ]
-				rpc("set_countdown",0)
+			if network.seq == 0:
+				network.seq = 1
 			else:
-				rpc("set_countdown",1)
+				network.seq = 0
+			rpc("set_countdown",network.seq)
 			Player_queue.change_turn()
 		else:
 			_on_switch_attacker()
@@ -47,10 +47,11 @@ func _on_switch_attacker():
 	print("switch attacking side")
 	rpc("clear_board")
 	rpc("display_to_output","switch attacking side!")
-	if network.prev_board.empty():
-			rpc("set_countdown",0)
+	if network.seq == 0:
+		network.seq = 1
 	else:
-		 	rpc("set_countdown",1)
+		network.seq = 0
+	rpc("set_countdown",network.seq)
 	network.end_round = false
 	if Player_queue.round_count >= 4:
 		Player_queue.end_game()
