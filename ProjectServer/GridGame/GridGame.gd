@@ -10,12 +10,16 @@ func _on_restart():
 		network.seq = 0
 		#randomize first player
 		if(network.who_start == 0):
+			print("let player 1 go first")
 			Player_queue.active_player_index = 0
 			rpc_id(int(Player_queue.get_child(0).name),"turn_button_active")
-		else:
+		elif(network.who_start == 1):
+			print("let player 2 go first")
 			Player_queue.active_player_index = 1
 			rpc_id(int(Player_queue.get_child(1).name),"turn_button_active")
-			
+		else:
+			print("randomize player")
+			randomize_player()
 		Player_queue.start_turn()
 		rpc("set_whose_turn",network.player_dict[int(Player_queue.get_child(Player_queue.get_active_player_index()).name)])
 		rpc("set_countdown",10)

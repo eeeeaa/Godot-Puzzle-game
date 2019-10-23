@@ -103,7 +103,9 @@ func pre_restart_game():
 		get_node("/root/GridGame").spawn_player(id)
 	rpc("pre_restart_game")
 remote func set_who_first(score_1,score_2):
-	if score_1 >= score_2:
+	if score_1 > score_2:
 		who_start = 0
-	else:
+	elif score_1 < score_2:
 		who_start = 1
+	else:
+		who_start = -1

@@ -1,6 +1,6 @@
 extends Node
 
-const ADDRESS = "127.0.0.1"
+const ADDRESS = "192.168.0.184"
 const PORT = 5000
 
 signal connection_failed
