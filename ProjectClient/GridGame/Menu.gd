@@ -45,6 +45,6 @@ func _on_readyButton_pressed():
 	yield($CanvasLayer/lobby,"fade_finished")
 	$CanvasLayer/lobby.hide()
 	$CanvasLayer/lobby/Panel/readyButton.disabled = true
-	network.rpc_id(1, "player_ready")
+	network.rpc_id(1, "player_ready",false)
 
 

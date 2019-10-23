@@ -54,10 +54,15 @@ func get_player_list():
 	return player_dict.values()
 	
 puppet func pre_start_game():
-	get_node("/root/Menu").hide()
+	if get_node("/root/Menu") != null:
+		get_node("/root/Menu").hide()
 	var world = load("res://GridGame/GridGame.tscn").instance()
 	get_tree().get_root().add_child(world)
 	rpc_id(1, "post_start_game")
+puppetsync func pre_restart_game():
+	var world = load("res://GridGame/GridGame.tscn").instance()
+	get_tree().get_root().add_child(world)
+	rpc_id(1, "post_restart_game")
 puppetsync func end_game():
 	var world = get_tree().get_root().get_node("GridGame")
 	get_tree().get_root().remove_child(world)

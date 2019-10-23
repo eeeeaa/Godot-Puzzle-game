@@ -72,3 +72,5 @@ margin_top = 330.0
 margin_right = 298.0
 margin_bottom = 360.0
 text = "quit"
+[connection signal="pressed" from="Result/restartButton" to="." method="_on_restartButton_pressed"]
+[connection signal="pressed" from="Result/quitButton" to="." method="_on_quitButton_pressed"]
