@@ -9,6 +9,7 @@ func _on_restart():
 	if one_shot == false:#make sure it runs only one time
 		network.seq = 0
 		#randomize first player
+		print("who_start: " + str(network.who_start))
 		if(network.who_start == 0):
 			print("let player 1 go first")
 			Player_queue.active_player_index = 0
@@ -18,7 +19,7 @@ func _on_restart():
 			Player_queue.active_player_index = 1
 			rpc_id(int(Player_queue.get_child(1).name),"turn_button_active")
 		else:
-			print("randomize player")
+			print("random")
 			randomize_player()
 		Player_queue.start_turn()
 		rpc("set_whose_turn",network.player_dict[int(Player_queue.get_child(Player_queue.get_active_player_index()).name)])
@@ -51,6 +52,7 @@ func spawn_player(id):
 remote func change_turn():
 	#only change turn if recieved command from the active player
 	print("server change turn")
+	print("round: " + str(Player_queue.round_count))
 	if int(Player_queue.get_child(Player_queue.get_active_player_index()).name) == get_tree().get_rpc_sender_id():
 		if network.end_round != true:
 			rpc("clear_board")
@@ -80,5 +82,9 @@ func _on_switch_attacker():
 		Player_queue.end_game()
 
 func _on_resetScoreButton_pressed():
+	print("resetting score")
 	rpc("resetting_score")
 		
+func _on_resetRoundButton_pressed():
+	print("resetting round")
+	Player_queue.round_count = 0

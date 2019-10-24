@@ -8,7 +8,7 @@ func _ready():
 func _on_restartButton_pressed():
 	self.hide()
 	network.rpc_id(1, "player_ready",true)
-	network.rpc_id(1,"set_who_start",network.score_1,network.score_2)
+	network.rpc_id(1,"set_who_first",network.score_1,network.score_2)
 	rpc("hide_result")
 remote func hide_result():
 	self.hide()
