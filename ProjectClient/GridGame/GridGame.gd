@@ -1,68 +1,75 @@
 extends Node2D
 
-onready var Player = load("res://GridGame/Player.tscn")
-onready var Player_queue = get_node("Players")
 onready var boardMap = $board_pos
-var prev_board = []
-var my_record = []
+onready var Player = load("res://GridGame/Player_board.tscn")
+onready var Player_queue = get_node("Players")
+onready var turn_button = get_node("Interface/upper_panel/turnButton")
+onready var chat_display = $Interface/bottom_panel/chat_display
+onready var game_output = $Interface/game_output
 var countdown = 10
 var timer
-func _ready():
-	$Interface/timeText.text = str(countdown)
-	timer = Timer.new()
-	timer.one_shot = false
-	timer.set_wait_time(1.0)
-	timer.connect("timeout",self,"_on_timer_timeout") 
-	add_child(timer)
-	timer.start()
-func _on_timer_timeout():
-	if countdown <= 0:
-		timer.stop()
-		timer.queue_free()
-	else:
-		countdown -= 1
-		$Interface/timeText.text = str(countdown)
-		
-func compare_board(board_a:Array,board_b:Array):
-	var score = 0
-	var length = min(board_a.size(),board_b.size())
-	for i in range(length):
-		if board_a[i] == board_b[i]:
-			score+=1
-	if board_a.size() == board_b.size() and score == board_a.size():
-		print("true")
-	else:
-		print("false")
-func get_current_board():
-	return my_record
-	
-func clear_board():
-	for i in $board.get_children():
-		i.clear_tex()
-		
-func _on_Button_pressed():
-	var current = get_current_board()
-	print(current)
-	compare_board(prev_board,current)
-	prev_board.clear()
-func _on_Store_pressed():
-	prev_board = get_current_board().duplicate()
-	print(prev_board)
-func _on_clear_pressed():
-	my_record.clear()
-	prev_board.clear()
-	clear_board()
-
+signal turn_changed
 puppet func spawn_player(id):
 	var player = Player.instance()
 	player.name = String(id) # Important
 	player.set_network_master(id) # Important
 	Player_queue.add_child(player)
+	print("add " + str(player.name))
+	$Interface/upper_panel/my_name.set_text(network.my_name)
+func _process(delta):
+	$Interface/upper_panel/my_score.text = "Score: " + str(network.my_score)
+func _ready():
+	turn_button.disabled = true
+	$Interface/upper_panel/timeText.text = str(countdown)
+	$Interface/upper_panel/turn_status.text = "Attacker's turn"
+	timer = Timer.new()
+	timer.one_shot = false
+	timer.set_wait_time(1.0)
+	timer.connect("timeout",self,"_on_timer_timeout") 
+	add_child(timer)
+func _on_timer_timeout():
+	if countdown <= 0:
+		if turn_button.disabled == false:
+			emit_signal("turn_changed")
+			rpc_id(1,"change_turn")
+	else:
+		countdown -= 1
+		$Interface/upper_panel/timeText.text = str(countdown)
+sync func start_timer():
+	timer.start()
+remote func set_countdown(val_board):
+	timer.stop()
+	var turn_status = $Interface/upper_panel/turn_status
+	if val_board == 0:
+		turn_status.text = "Attacker's turn"
+		turn_status.modulate = Color.red
+		countdown = 10
+	elif val_board == 1:
+		turn_status.text = "Defender's turn"
+		turn_status.modulate = Color.blue
+		countdown = 20
+	timer.start()
+sync func clear_board():
+	for i in boardMap.get_used_cells():
+		boardMap.set_cell(i[0],i[1],2)	
+remote func turn_button_active():
+	turn_button.disabled = false
+remote func turn_button_swap():
+	turn_button.disabled = !turn_button.disabled
+remote func display_to_output(msg):
+	game_output.text += msg + "\n"
+remote func resetting_score():
+	for i in Player_queue.get_children():
+		i.reset_score()
+remote func set_whose_turn(current_player):
+	var whose_turn = $Interface/upper_panel/whose_turn
+	if network.my_name == str(current_player):
+		whose_turn.text = "Your turn"
+		whose_turn.modulate = Color.green
+	else:
+		whose_turn.text = str(current_player) + "'s turn"
+		whose_turn.modulate = Color.red
+func _on_turnButton_pressed():
+	emit_signal("turn_changed")
+	rpc_id(1,"change_turn")
 
-func _input(event):
-	if Input.is_action_just_pressed("mouse"):
-		var selected_mouse_pos = get_viewport().get_mouse_position()
-		var selected_tile_pos = boardMap.world_to_map(selected_mouse_pos)
-		var current_tile = boardMap.get_cellv(selected_tile_pos)
-		if current_tile != -1:
-			my_record.append(selected_tile_pos)

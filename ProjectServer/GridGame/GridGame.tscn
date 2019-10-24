@@ -1,8 +1,57 @@
-[gd_scene load_steps=2 format=2]
+[gd_scene load_steps=4 format=2]
 
 [ext_resource path="res://GridGame/GridGame.gd" type="Script" id=1]
+[ext_resource path="res://GridGame/TurnController.gd" type="Script" id=2]
+[ext_resource path="res://GridGame/GridPoint.tscn" type="PackedScene" id=3]
 
 [node name="GridGame" type="Node2D"]
 script = ExtResource( 1 )
 
 [node name="Players" type="Node2D" parent="."]
+script = ExtResource( 2 )
+
+[node name="board" type="Node2D" parent="."]
+editor/display_folded = true
+visible = false
+
+[node name="GridPoint" parent="board" instance=ExtResource( 3 )]
+
+[node name="GridPoint2" parent="board" instance=ExtResource( 3 )]
+
+[node name="GridPoint3" parent="board" instance=ExtResource( 3 )]
+
+[node name="GridPoint4" parent="board" instance=ExtResource( 3 )]
+
+[node name="GridPoint5" parent="board" instance=ExtResource( 3 )]
+
+[node name="GridPoint6" parent="board" instance=ExtResource( 3 )]
+
+[node name="GridPoint7" parent="board" instance=ExtResource( 3 )]
+
+[node name="GridPoint8" parent="board" instance=ExtResource( 3 )]
+
+[node name="GridPoint9" parent="board" instance=ExtResource( 3 )]
+
+[node name="resetScoreButton" type="Button" parent="."]
+margin_left = 329.922
+margin_top = 443.902
+margin_right = 464.922
+margin_bottom = 482.902
+text = "Reset score"
+
+[node name="resetRoundButton" type="Button" parent="."]
+margin_left = 329.572
+margin_top = 509.0
+margin_right = 466.572
+margin_bottom = 544.0
+text = "Reset round"
+
+[node name="Button" type="Button" parent="."]
+margin_left = 329.0
+margin_top = 374.029
+margin_right = 467.0
+margin_bottom = 415.029
+text = "Reset"
+[connection signal="pressed" from="resetScoreButton" to="." method="_on_resetScoreButton_pressed"]
+[connection signal="pressed" from="resetRoundButton" to="." method="_on_resetRoundButton_pressed"]
+[connection signal="pressed" from="Button" to="." method="_on_reset_pressed"]
