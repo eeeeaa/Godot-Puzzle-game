@@ -8,6 +8,7 @@ onready var chat_display = $Interface/bottom_panel/chat_display
 onready var game_output = $Interface/game_output
 var countdown = 10
 var timer
+var player = AudioStreamPlayer.new()
 signal turn_changed
 puppet func spawn_player(id):
 	var player = Player.instance()
@@ -72,4 +73,7 @@ remote func set_whose_turn(current_player):
 func _on_turnButton_pressed():
 	emit_signal("turn_changed")
 	rpc_id(1,"change_turn")
+	self.add_child(player)
+	player.stream=load("res://sound6.wav")
+	player.play()
 

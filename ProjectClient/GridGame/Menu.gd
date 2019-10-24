@@ -6,9 +6,13 @@ func _ready():
 	network.connect("server_disconnected", self, "_on_server_disconnect")
 	network.connect("players_updated", self, "update_players_list")
 
+var player = AudioStreamPlayer.new()
 func _on_JoinButton_pressed():
 	network.my_name = $CanvasLayer/nameEdit.text
 	network.connect_to_server()
+	self.add_child(player)
+	player.stream=load("res://sound6.wav")
+	player.play()
 
 
 func _on_connection_success():
@@ -17,6 +21,9 @@ func _on_connection_success():
 	$CanvasLayer/nameEdit.hide()
 	$CanvasLayer/lobby.show()
 	$CanvasLayer/lobby.fade_in()
+	#self.add_child(player)
+	#player.stream=load("res://sound19.wav")
+	#player.play()
 
 
 func _on_connection_failed():
@@ -38,6 +45,9 @@ func update_players_list():
 	var player_list = network.get_player_list()
 	for i in player_list:
 		$CanvasLayer/lobby/Panel/player_list.text += str(i) + "\n"
+	self.add_child(player)
+	player.stream=load("res://sound51.wav")
+	player.play()
 
 func _on_readyButton_pressed():
 	# Tell server we are ready to join the game
@@ -46,5 +56,10 @@ func _on_readyButton_pressed():
 	$CanvasLayer/lobby.hide()
 	$CanvasLayer/lobby/Panel/readyButton.disabled = true
 	network.rpc_id(1, "player_ready",false)
+	self.add_child(player)
+	player.stream=load("res://sound6.wav")
+	player.play()
+	
+	
 
 
