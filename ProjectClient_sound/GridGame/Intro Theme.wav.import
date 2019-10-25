@@ -1,0 +1,21 @@
+[remap]
+
+importer="wav"
+type="AudioStreamSample"
+path="res://.import/Intro Theme.wav-5d29a4720e2e02d833c408f3dcfb221f.sample"
+
+[deps]
+
+source_file="res://GridGame/Intro Theme.wav"
+dest_files=[ "res://.import/Intro Theme.wav-5d29a4720e2e02d833c408f3dcfb221f.sample" ]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=true
+edit/normalize=true
+edit/loop=false
+compress/mode=0
